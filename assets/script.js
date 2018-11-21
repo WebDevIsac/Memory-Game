@@ -3,8 +3,8 @@
 // Define variables
 const container = document.querySelector('.container');
 const gameContainer = document.querySelector('.game-container');
+const tiles = document.querySelectorAll('.game-container > div');
 
-let tiles = document.querySelectorAll('.game-container > div');
 let tilesArray = Array.from(tiles);
 
 
@@ -23,5 +23,6 @@ function shuffle (array) {
     return array;
 }
 
-console.log(shuffle(tilesArray));
+let shuffled = shuffle(tilesArray);
 
+console.log(shuffled);
