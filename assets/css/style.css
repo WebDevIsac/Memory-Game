@@ -1,12 +1,17 @@
+@font-face {
+    font-family: 'Ringbearer';
+    src: url(assets/fonts/RingbearerMedium.woff);
+}
 
 * {
     margin: 0; 
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Ringbearer';
 }
 
 .container {
-    width: 60%;
+    width: 80%;
     height: 100vh;
     margin: 0 auto;
     background: #F4F4F4;
@@ -25,15 +30,22 @@
     grid-gap: 1rem
 }
 
+.game-container-hard {
+    grid-template-columns: repeat(5, 6rem);
+}
+
 .front-face {
     display: none;
     width: 100%;
     height: 100%;
-    transition: 3s ease-in-out;
 }
 
 .back-face {
     display: block;
     width: 100%;
     height: 100%;
+}
+
+.hard-mode {
+    
 }

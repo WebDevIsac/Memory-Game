@@ -6,6 +6,8 @@ const gameContainer = document.querySelector('.game-container');
 const tiles = document.querySelectorAll('.game-container > div');
 
 
+
+
 // Easy mode
 function easyMode () {
   for (i = 0; i < tiles.length; i++) {
@@ -27,5 +29,3 @@ function mediumMode () {
 function hardMode () {
     gameContainer.appendChild();
 }
-
-hardMode();
