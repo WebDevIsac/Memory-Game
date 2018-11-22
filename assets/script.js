@@ -4,13 +4,13 @@
 const container = document.querySelector('.container');
 const gameContainer = document.querySelector('.game-container');
 const tiles = document.querySelectorAll('.game-container > div');
-
+const hardModeTiles = document.querySelectorAll('.hard-mode');
 
 
 
 // Easy mode
 function easyMode () {
-  for (i = 0; i < tiles.length; i++) {
+  for (let i = tiles.length; i--;) {
     gameContainer.appendChild(tiles[Math.random() * i | 0]);
   }
 }
@@ -27,5 +27,10 @@ function mediumMode () {
 
 // Hard mode
 function hardMode () {
-    gameContainer.appendChild();
+  for (let i = 0; i < hardModeTiles.length; i++) {
+    hardModeTiles[i].classList.remove('hide');
+    gameContainer.classList.add('game-container-hard-mode');
+  }
+  mediumMode();
 }
+

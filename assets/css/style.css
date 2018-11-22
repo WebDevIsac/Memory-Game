@@ -1,13 +1,9 @@
-@font-face {
-    font-family: 'Ringbearer';
-    src: url(assets/fonts/RingbearerMedium.woff);
-}
 
 * {
     margin: 0; 
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Ringbearer';
+    font-family: 'MedievalSharp';
 }
 
 .container {
@@ -23,15 +19,22 @@
 
 .game-container {
     padding: 50px;
-    background: #FFFFFF;
+    background: '#FFFFFF';
+    background-image: url(https://i.ytimg.com/vi/v--qFa6WQJo/maxresdefault.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
     display: grid;
     grid-template-columns: repeat(4, 6rem);
     grid-template-rows: repeat(4, 6rem);
     grid-gap: 1rem
 }
 
-.game-container-hard {
+.game-container-hard-mode {
     grid-template-columns: repeat(5, 6rem);
+}
+
+.tile {
+    border: 1px solid #F4F4F4;
 }
 
 .front-face {
@@ -46,6 +49,6 @@
     height: 100%;
 }
 
-.hard-mode {
-    
+.hide {
+    display: none;
 }
