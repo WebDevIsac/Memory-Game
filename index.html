@@ -4,16 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Memory x3000</title>
+    <title>Memory Game</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=MedievalSharp" rel="stylesheet">
 </head>
 <body>
-
     <div class="container">
-        <h1>The Lord of the Rings</h1>
-        <h1>Memory</h1>
-        <div class="game-container game-container-hard">
+        <div class="section">
+            <div class="header">    
+                <h1>The Lord of the Rings</h1>
+                <h1>Memory</h1>
+            </div>
+            <div class="difficulty">
+                <p>Select Game Difficulty</p>
+                <div class="easy-mode">Easy</div>
+                <div class="medium-mode">Medium</div>
+                <div class="hard-mode">Hard</div>
+            </div>
+        </div>
+        <div class="game-container">
             <div class="tile">
                 <img class="front-face" src="assets/images/Front.jpg" alt="">
                 <img class="back-face" src="assets/images/Aragorn.jpg" alt="">
@@ -96,7 +105,6 @@
             </div>
         </div>
     </div>
-
 
     <script src="assets/script.js"></script>
 </body>
