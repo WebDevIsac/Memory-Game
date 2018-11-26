@@ -34,7 +34,7 @@ function checkMode () {
 // Easy mode
 function easyMode () {
   checkMode();
-  for (let i = cards.length; i--;) {
+  for (let i = 0; i < 17; i++) {
     let random = Math.floor(Math.random() * i);
     gameContainer.appendChild(cards[random]);
   }
@@ -42,7 +42,7 @@ function easyMode () {
 
 function mediumMode () {
   checkMode();
-  for (let i = 0; i < cards.length; i++) {
+  for (let i = 0; i < 17; i++) {
     let random = Math.floor((Math.random() * 17));
     gameContainer.appendChild(cards[random]);
   }
@@ -53,8 +53,8 @@ function hardMode () {
   for (let i = 0; i < hardModeCards.length; i++) {
     hardModeCards[i].classList.remove('hide');
   }
-  for (let i = 0; i < cards.length; i++) {
-    let random = Math.floor((Math.random() * 20));
+  for (let i = 0; i < 21; i++) {
+    let random = Math.floor((Math.random() * 21));
     gameContainer.appendChild(cards[random]);
   }
   gameContainer.classList.add('game-container-hard');
