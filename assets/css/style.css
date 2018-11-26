@@ -67,20 +67,14 @@
     grid-template-columns: repeat(5, 6rem);
 }
 
-.tile {
+.card {
     border: 1px solid #F4F4F4;
 }
 
-.front-face {
-    display: none;
+.front-card, .back-card {
     width: 100%;
     height: 100%;
-}
-
-.back-face {
     display: block;
-    width: 100%;
-    height: 100%;
 }
 
 .hide {
