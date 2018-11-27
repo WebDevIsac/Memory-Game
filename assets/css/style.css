@@ -33,9 +33,35 @@
     padding: 10px;
 }
 
+.start {
+    text-align: center;
+}
+
+.start > :first-child {
+    margin: 30px;
+    cursor: pointer;
+}
+
+.start > :first-child:hover {
+    color: #9b9b9b;
+}
+
+.start > :nth-child(2) {
+    font-size: 24px;
+}
+
+.start > :last-child {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.start > :last-child:hover {
+    color: #9b9b9b;
+}
+
 .difficulty {
     font-size: 24px;
-    text-align: left;
+    text-align: center;
 }
 
 .difficulty * {
@@ -51,16 +77,28 @@
     color: #9b9b9b;
 }
 
+.back-menu {
+    text-align: center;
+}
+
+.back-menu > h1 {
+    cursor: pointer;
+}
+
+.back-menu > h1:hover {
+    color: #9b9b9b;
+}
+
 .game-container {
     padding: 50px;
-    background: '#FFFFFF';
-    background-image: url(https://i.ytimg.com/vi/v--qFa6WQJo/maxresdefault.jpg);
+    background-image: url(../images/background.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     display: grid;
     grid-template-columns: repeat(4, 6rem);
     grid-template-rows: repeat(4, 6rem);
-    grid-gap: 1rem
+    grid-gap: 1rem;
+    overflow: hidden;
 }
 
 .game-container-hard {
@@ -69,6 +107,7 @@
 
 .card {
     border: 1px solid #F4F4F4;
+    cursor: pointer;
 }
 
 .front-card, .back-card {
@@ -77,6 +116,22 @@
     display: block;
 }
 
+.flip {
+    animation: flip 1s ease-in;
+}
+
 .hide {
     display: none;
+}
+
+@keyframes flip {
+    0% {
+        transform: rotateX(0deg);
+    }
+    50% {
+        transform: rotateX(90deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
 }
