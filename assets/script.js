@@ -18,6 +18,8 @@ const frontCards = document.querySelectorAll('.front-card');
 const backCards = document.querySelectorAll('.back-card');
 
 let mode = 'easy';
+let cardsUp = 0;
+let open = [];
 
 startBtn.addEventListener('click', startGame);
 difficultyBtn.addEventListener('click', chooseDifficulty);
@@ -29,7 +31,7 @@ function startGame () {
     cards[i].classList.remove('hide');
   }
   if (mode === 'easy') {
-    easyMode();
+    // easyMode();
     gameContainer.classList.remove('game-container-hard');
   } 
   else if (mode === 'medium') {
@@ -118,9 +120,11 @@ hardBtn.addEventListener('click', () => {
   backToStart();
 });
 
+
 // Flip cards
 for (let i = 0; i < cards.length; i++) {
   cards[i].addEventListener('click', () => {
+    cards[i].classList.add('open');
     cards[i].classList.add('flip');
     setTimeout(() => {
       frontCards[i].classList.add('hide');
@@ -129,7 +133,18 @@ for (let i = 0; i < cards.length; i++) {
     setTimeout(() => {
       cards[i].classList.remove('flip');
     }, 1000);
+    open.push(cards[i]);
+    if (open.length === 2) {
+      check();
+    }
   });
 }
+function check () {
+  if (open[0].getAttribute('data-name') === open[1].getAttribute('data-name')) {
+    console.log(open[0].getAttribute('data-name') + open[1].getAttribute('data-name'));
+    
+  }
+}
+
 
 
