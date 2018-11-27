@@ -116,12 +116,16 @@
     display: block;
 }
 
-.flip {
-    animation: flip 1s ease-in;
+.disabled {
+    pointer-events: none;
 }
 
 .hide {
     display: none;
+}
+
+.flip {
+    animation: flip 1s ease-in;
 }
 
 @keyframes flip {

@@ -31,7 +31,7 @@ function startGame () {
     cards[i].classList.remove('hide');
   }
   if (mode === 'easy') {
-    // easyMode();
+    easyMode();
     gameContainer.classList.remove('game-container-hard');
   } 
   else if (mode === 'medium') {
@@ -122,29 +122,60 @@ hardBtn.addEventListener('click', () => {
 
 
 // Flip cards
-for (let i = 0; i < cards.length; i++) {
-  cards[i].addEventListener('click', () => {
-    cards[i].classList.add('open');
-    cards[i].classList.add('flip');
-    setTimeout(() => {
-      frontCards[i].classList.add('hide');
-      backCards[i].classList.remove('hide'); 
-    }, 600);
-    setTimeout(() => {
-      cards[i].classList.remove('flip');
-    }, 1000);
-    open.push(cards[i]);
-    if (open.length === 2) {
-      check();
-    }
-  });
+function cardEvent () {
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].addEventListener('click', () => {
+      cards[i].classList.add('flip');
+      setTimeout(() => {
+        frontCards[i].classList.add('hide');
+        backCards[i].classList.remove('hide'); 
+      }, 600);
+      setTimeout(() => {
+        cards[i].classList.remove('flip');
+      }, 1000);
+      cards[i].classList.add('disabled');
+      open.push(cards[i]);
+      if (open.length === 2) {
+        check();
+      }
+    });
+  }
 }
+
 function check () {
+  
+  gameContainer.classList.add('disabled');
+  
+  // If cards match
   if (open[0].getAttribute('data-name') === open[1].getAttribute('data-name')) {
-    console.log(open[0].getAttribute('data-name') + open[1].getAttribute('data-name'));
-    
+    setTimeout(() => {
+      gameContainer.classList.remove('disabled');
+      open.splice(0);
+    }, 500);
+  } 
+  else if (open[0].getAttribute('data-name') !== open[1].getAttribute('data-name')) {
+    setTimeout(() => {
+      open[0].classList.remove('disabled');
+      open[1].classList.remove('disabled');
+
+      open[0].classList.add('flip');
+      open[1].classList.add('flip');
+      setTimeout(() => {
+        open[0].querySelector('.back-card').classList.add('hide');
+        open[0].querySelector('.front-card').classList.remove('hide');
+        open[1].querySelector('.back-card').classList.add('hide');
+        open[1].querySelector('.front-card').classList.remove('hide');
+      }, 600);
+      setTimeout(() => {
+        open[0].classList.remove('flip');
+        open[1].classList.remove('flip');
+        gameContainer.classList.remove('disabled');
+        open.splice(0);
+      }, 1000);
+
+    }, 2500);
   }
 }
 
 
-
+cardEvent();
