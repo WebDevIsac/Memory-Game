@@ -19,7 +19,7 @@
 }
 
 .section {
-    height: 40vh;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -35,24 +35,30 @@
 
 .start {
     text-align: center;
+    padding: 40px;
 }
 
 .start > :first-child {
-    margin: 30px;
-    cursor: pointer;
-}
-
-.start > :first-child:hover {
-    color: #9b9b9b;
+    font-size: 24px;
+    margin: 20px 0;
 }
 
 .start > :nth-child(2) {
+    cursor: pointer;
     font-size: 24px;
+    display: block;
+    border-bottom: 2px solid black;
+    display: inline-block;
+}
+
+.start > :nth-child(2):hover {
+    color: #9b9b9b;
 }
 
 .start > :last-child {
+    margin: 80px 0;
     cursor: pointer;
-    font-size: 24px;
+    display: block;
 }
 
 .start > :last-child:hover {
@@ -62,6 +68,7 @@
 .difficulty {
     font-size: 24px;
     text-align: center;
+    margin: 100px 0;
 }
 
 .difficulty * {
@@ -77,15 +84,21 @@
     color: #9b9b9b;
 }
 
-.back-menu {
+.play-menu {
     text-align: center;
+    margin: 40px 0;
 }
 
-.back-menu > h1 {
+.play-menu > h2 {
+    margin: 40px 0;
+}
+
+.play-menu > :last-child {
     cursor: pointer;
+    display: inline-block;
 }
 
-.back-menu > h1:hover {
+.play-menu > :last-child:hover {
     color: #9b9b9b;
 }
 

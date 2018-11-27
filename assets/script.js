@@ -7,45 +7,51 @@ const cards = document.querySelectorAll('.card');
 const hardModeCards = document.querySelectorAll('.hard-card');
 const difficulty = document.querySelector('.difficulty');
 const start = document.querySelector('.start');
-const startBtn = start.querySelector(':first-child');
-const difficultyBtn = start.querySelector(':last-child');
+const difficultyBtn = start.querySelector(':nth-child(2)');
+const startBtn = start.querySelector(':last-child');
 const easyBtn = document.querySelector('.easy-mode');
 const mediumBtn = document.querySelector('.medium-mode');
 const hardBtn = document.querySelector('.hard-mode');
-const backMenu = document.querySelector('.back-menu');
-const backMenuBtn = backMenu.querySelector('h1')
+const playMenu = document.querySelector('.play-menu');
+const cardsFlippedSpan = playMenu.querySelector(':first-child > span');
+const scoreSpan = playMenu.querySelector(':nth-child(2) > span');
+const playMenuBtn = playMenu.querySelector('h1')
 const frontCards = document.querySelectorAll('.front-card');
 const backCards = document.querySelectorAll('.back-card');
 
-let mode = 'easy';
-let cardsUp = 0;
+let mode = 'Easy';
 let open = [];
+let cardsFlipped = 0;
+let score = 0;
+
+let audio = document.querySelector('audio')
 
 startBtn.addEventListener('click', startGame);
 difficultyBtn.addEventListener('click', chooseDifficulty);
-backMenuBtn.addEventListener('click', backToMenu);
+playMenuBtn.addEventListener('click', backToMenu);
 
 function startGame () {
   startBtn.parentElement.classList.add('hide');
   for (let i = 0; i < cards.length - 4; i++) {
     cards[i].classList.remove('hide');
   }
-  if (mode === 'easy') {
+  if (mode === 'Easy') {
     easyMode();
     gameContainer.classList.remove('game-container-hard');
   } 
-  else if (mode === 'medium') {
+  else if (mode === 'Medium') {
     mediumMode();
     gameContainer.classList.remove('game-container-hard');
   } 
-  else if (mode === 'hard') {
+  else if (mode === 'Hard') {
     hardMode();
     for (let i = 0; i < hardModeCards.length; i++) {
       hardModeCards[i].classList.remove('hide');
     }
     gameContainer.classList.add('game-container-hard');
   }
-  backMenu.classList.remove('hide');
+  playMenu.classList.remove('hide');
+  audio.play();
 }
 
 function backToStart () {
@@ -62,7 +68,7 @@ function chooseDifficulty () {
 function backToMenu () {
   resetCards();
   backToStart();
-  backMenu.classList.add('hide');
+  playMenu.classList.add('hide');
   for (let i = 0; i < cards.length; i++) {
     cards[i].classList.add('hide');
   }
@@ -108,15 +114,15 @@ function hardMode () {
 
 // Eventlisteners for game difficulty on click 
 easyBtn.addEventListener('click', () => {
-  mode = 'easy';
+  mode = easyBtn.innerHTML;
   backToStart();
 });
 mediumBtn.addEventListener('click', () => {
-  mode = 'medium';
+  mode = mediumBtn.innerHTML;
   backToStart();
 });
 hardBtn.addEventListener('click', () => {
-  mode = 'hard';
+  mode = hardBtn.innerHTML;
   backToStart();
 });
 
@@ -134,6 +140,8 @@ function cardEvent () {
         cards[i].classList.remove('flip');
       }, 1000);
       cards[i].classList.add('disabled');
+      cardsFlipped++;
+      cardsFlippedSpan.innerHTML = cardsFlipped;
       open.push(cards[i]);
       if (open.length === 2) {
         check();
@@ -151,6 +159,8 @@ function check () {
     setTimeout(() => {
       gameContainer.classList.remove('disabled');
       open.splice(0);
+      score++;
+      scoreSpan.innerHTML = score;
     }, 500);
   } 
   else if (open[0].getAttribute('data-name') !== open[1].getAttribute('data-name')) {
@@ -160,6 +170,7 @@ function check () {
 
       open[0].classList.add('flip');
       open[1].classList.add('flip');
+
       setTimeout(() => {
         open[0].querySelector('.back-card').classList.add('hide');
         open[0].querySelector('.front-card').classList.remove('hide');
