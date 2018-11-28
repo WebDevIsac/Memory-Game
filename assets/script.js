@@ -1,35 +1,70 @@
 
 
-// Define variables
-const container = document.querySelector('.container');
+// Defining variables
+
+// Div and containers
 const gameContainer = document.querySelector('.game-container');
-const cards = document.querySelectorAll('.card');
-const hardModeCards = document.querySelectorAll('.hard-card');
+const playMenu = document.querySelector('.play-menu');
 const difficulty = document.querySelector('.difficulty');
 const start = document.querySelector('.start');
+
+// Buttons
 const difficultyBtn = start.querySelector(':nth-child(2)');
 const startBtn = start.querySelector(':last-child');
 const easyBtn = document.querySelector('.easy-mode');
 const mediumBtn = document.querySelector('.medium-mode');
 const hardBtn = document.querySelector('.hard-mode');
-const playMenu = document.querySelector('.play-menu');
-const cardsFlippedSpan = playMenu.querySelector(':first-child > span');
-const scoreSpan = playMenu.querySelector(':nth-child(2) > span');
-const playMenuBtn = playMenu.querySelector('h1')
+const backBtn = playMenu.querySelector('h1');
+
+// Cards
+const cards = document.querySelectorAll('.card');
 const frontCards = document.querySelectorAll('.front-card');
 const backCards = document.querySelectorAll('.back-card');
+const hardModeCards = document.querySelectorAll('.hard-card');
+
+// Span for text changes
+const cardsFlippedSpan = playMenu.querySelector(':first-child > span');
+const scoreSpan = playMenu.querySelector(':nth-child(2) > span');
+
 const music = document.querySelector('.music');
 const flipSound = document.querySelector('.flip-sound');
 
+// Changable variables
 let mode = 'Easy';
 let open = [];
 let cardsFlipped = 0;
 let score = 0;
 
+// Set audio volume
+music.volume = 0.25;
+flipSound.volume = 1;
 
+// Event listeners
+
+// Before game starts
 startBtn.addEventListener('click', startGame);
 difficultyBtn.addEventListener('click', chooseDifficulty);
-playMenuBtn.addEventListener('click', backToMenu);
+backBtn.addEventListener('click', backToMenu);
+
+// Choose difficulty
+easyBtn.addEventListener('click', () => {
+  mode = easyBtn.innerHTML;
+  backToStart();
+});
+mediumBtn.addEventListener('click', () => {
+  mode = mediumBtn.innerHTML;
+  backToStart();
+});
+hardBtn.addEventListener('click', () => {
+  mode = hardBtn.innerHTML;
+  backToStart();
+});
+
+function loopingCards () {
+  for (let i = 0; i < cards.length; i++) {
+    
+  }
+}
 
 function startGame () {
   startBtn.parentElement.classList.add('hide');
@@ -52,7 +87,9 @@ function startGame () {
     gameContainer.classList.add('game-container-hard');
   }
   playMenu.classList.remove('hide');
-  // music.play();
+  cardsFlippedSpan.innerHTML = cardsFlipped;
+  scoreSpan.innerHTML = score;
+  music.play();
 }
 
 function backToStart () {
@@ -77,6 +114,8 @@ function backToMenu () {
   }
   score = 0;
   cardsFlipped = 0;
+  music.pause();
+  music.currentTime = 0;
   backToStart();
 }
 
@@ -118,19 +157,6 @@ function hardMode () {
   gameContainer.classList.add('game-container-hard');
 }
 
-// Eventlisteners for game difficulty on click 
-easyBtn.addEventListener('click', () => {
-  mode = easyBtn.innerHTML;
-  backToStart();
-});
-mediumBtn.addEventListener('click', () => {
-  mode = mediumBtn.innerHTML;
-  backToStart();
-});
-hardBtn.addEventListener('click', () => {
-  mode = hardBtn.innerHTML;
-  backToStart();
-});
 
 
 // Flip cards
