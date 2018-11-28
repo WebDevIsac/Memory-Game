@@ -18,13 +18,14 @@ const scoreSpan = playMenu.querySelector(':nth-child(2) > span');
 const playMenuBtn = playMenu.querySelector('h1')
 const frontCards = document.querySelectorAll('.front-card');
 const backCards = document.querySelectorAll('.back-card');
+const music = document.querySelector('.music');
+const flipSound = document.querySelector('.flip-sound');
 
 let mode = 'Easy';
 let open = [];
 let cardsFlipped = 0;
 let score = 0;
 
-let audio = document.querySelector('audio')
 
 startBtn.addEventListener('click', startGame);
 difficultyBtn.addEventListener('click', chooseDifficulty);
@@ -51,10 +52,11 @@ function startGame () {
     gameContainer.classList.add('game-container-hard');
   }
   playMenu.classList.remove('hide');
-  audio.play();
+  // music.play();
 }
 
 function backToStart () {
+  resetCards();
   startBtn.parentElement.classList.remove('hide');
   difficulty.classList.add('hide');
   difficultyBtn.innerHTML = mode;
@@ -66,12 +68,16 @@ function chooseDifficulty () {
 }
 
 function backToMenu () {
-  resetCards();
-  backToStart();
   playMenu.classList.add('hide');
   for (let i = 0; i < cards.length; i++) {
     cards[i].classList.add('hide');
+    cards[i].classList.remove('disabled');
+    frontCards[i].classList.remove('hide');
+    backCards[i].classList.add('hide');
   }
+  score = 0;
+  cardsFlipped = 0;
+  backToStart();
 }
 
 function resetCards () {
@@ -133,8 +139,11 @@ function cardEvent () {
     cards[i].addEventListener('click', () => {
       cards[i].classList.add('flip');
       setTimeout(() => {
+        flipSound.play();
+      }, 300);
+      setTimeout(() => {
         frontCards[i].classList.add('hide');
-        backCards[i].classList.remove('hide'); 
+        backCards[i].classList.remove('hide');
       }, 600);
       setTimeout(() => {
         cards[i].classList.remove('flip');
@@ -151,9 +160,7 @@ function cardEvent () {
 }
 
 function check () {
-  
   gameContainer.classList.add('disabled');
-  
   // If cards match
   if (open[0].getAttribute('data-name') === open[1].getAttribute('data-name')) {
     setTimeout(() => {
@@ -188,5 +195,11 @@ function check () {
   }
 }
 
-
 cardEvent();
+
+
+// function gameWon () {
+//   if () {
+
+//   }
+// }
