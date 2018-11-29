@@ -102,6 +102,36 @@
     color: #9b9b9b;
 }
 
+.game-won {
+    position: absolute;
+    top: 50%;
+    margin-top: -250px;
+    left: 50%;
+    margin-left: -250px;
+    width: 500px;
+    height: 500px;
+    background: white;
+    text-align: center;
+    padding: 50px 0;
+    border: 5px solid black;
+    font-size: 20px;
+    z-index: 2;
+}
+
+.game-won > :first-child {
+
+}
+
+.game-won > h2 {
+    font-size: 32px;
+    margin: 20px 0;
+    cursor: pointer;
+}
+
+.game-won > h2:hover {
+    color: #9b9b9b;
+}
+
 .game-container {
     padding: 50px;
     background-image: url(../images/background.jpg);
@@ -112,6 +142,7 @@
     grid-template-rows: repeat(4, 6rem);
     grid-gap: 1rem;
     overflow: hidden;
+    z-index: 1;
 }
 
 .game-container-hard {
