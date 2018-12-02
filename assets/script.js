@@ -66,20 +66,14 @@ hardBtn.addEventListener('click', () => {
 
 // Game won
 gameWonBackBtn.addEventListener('click', () => {
-  gameWon.classList.add('hide');
+  gameWon.setAttribute('id', 'hide');
   backToMenu();
 });
 
-function loopingCards () {
-  for (let i = 0; i < cards.length; i++) {
-    
-  }
-}
-
 function startGame () {
-  startBtn.parentElement.classList.add('hide');
+  startBtn.parentElement.setAttribute('id', 'hide');
   for (let i = 0; i < cards.length - 4; i++) {
-    cards[i].classList.remove('hide');
+    cards[i].removeAttribute('id', 'hide');
   }
   if (mode === 'Easy') {
     easyMode();
@@ -92,11 +86,11 @@ function startGame () {
   else if (mode === 'Hard') {
     hardMode();
     for (let i = 0; i < hardModeCards.length; i++) {
-      hardModeCards[i].classList.remove('hide');
+      hardModeCards[i].removeAttribute('id', 'hide');
     }
     gameContainer.classList.add('game-container-hard');
   }
-  playMenu.classList.remove('hide');
+  playMenu.removeAttribute('id', 'hide');
   cardsFlippedSpan.innerHTML = cardsFlipped;
   scoreSpan.innerHTML = score;
   music.play();
@@ -104,23 +98,23 @@ function startGame () {
 
 function backToStart () {
   resetCards();
-  startBtn.parentElement.classList.remove('hide');
-  difficulty.classList.add('hide');
+  startBtn.parentElement.removeAttribute('id', 'hide');
+  difficulty.setAttribute('id', 'hide');
   difficultyBtn.innerHTML = mode;
 }
 
 function chooseDifficulty () {
-  difficulty.classList.remove('hide');
-  startBtn.parentElement.classList.add('hide');
+  difficulty.removeAttribute('id', 'hide');
+  startBtn.parentElement.setAttribute('id', 'hide');
 }
 
 function backToMenu () {
-  playMenu.classList.add('hide');
+  playMenu.setAttribute('id', 'hide');
   for (let i = 0; i < cards.length; i++) {
-    cards[i].classList.add('hide');
+    cards[i].setAttribute('id', 'hide');
     cards[i].classList.remove('disabled');
-    frontCards[i].classList.remove('hide');
-    backCards[i].classList.add('hide');
+    frontCards[i].removeAttribute('id', 'hide');
+    backCards[i].setAttribute('id', 'hide');
   }
   score = 0;
   cardsFlipped = 0;
@@ -157,7 +151,7 @@ function mediumMode () {
 function hardMode () {
   resetCards();
   for (let i = 0; i < hardModeCards.length; i++) {
-    hardModeCards[i].classList.remove('hide');
+    hardModeCards[i].removeAttribute('id', 'hide');
   }
   for (let i = 0; i < 21; i++) {
     let random = Math.floor((Math.random() * 20));
@@ -167,7 +161,6 @@ function hardMode () {
 }
 
 // Flip cards
-function cardEvent () {
   for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener('click', () => {
       cards[i].classList.add('flip');
@@ -175,8 +168,8 @@ function cardEvent () {
         flipSound.play();
       }, 300);
       setTimeout(() => {
-        frontCards[i].classList.add('hide');
-        backCards[i].classList.remove('hide');
+        frontCards[i].setAttribute('id', 'hide');
+        backCards[i].removeAttribute('id', 'hide');
       }, 600);
       setTimeout(() => {
         cards[i].classList.remove('flip');
@@ -190,9 +183,6 @@ function cardEvent () {
       }
     });
   }
-}
-
-cardEvent();
 
 function check () {
   gameContainer.classList.add('disabled');
@@ -216,10 +206,10 @@ function check () {
       open[1].classList.add('flip');
 
       setTimeout(() => {
-        open[0].querySelector('.back-card').classList.add('hide');
-        open[0].querySelector('.front-card').classList.remove('hide');
-        open[1].querySelector('.back-card').classList.add('hide');
-        open[1].querySelector('.front-card').classList.remove('hide');
+        open[0].querySelector('.back-card').setAttribute('id', 'hide');
+        open[0].querySelector('.front-card').removeAttribute('id', 'hide');
+        open[1].querySelector('.back-card').setAttribute('id', 'hide');
+        open[1].querySelector('.front-card').removeAttribute('id', 'hide');
       }, 600);
 
       setTimeout(() => {
@@ -233,13 +223,15 @@ function check () {
 }
 
 function congratulations () {
-  if (mode === 'Easy' || mode === 'Medium') {
-    gameWon.classList.remove('hide');
+  if (score === 8 && (mode === 'Easy' || mode === 'Medium')) {
+    backBtn.setAttribute('id', 'hide');
+    gameWon.removeAttribute('id', 'hide');
     music.pause();
     clappingSound.play();
   } 
-  else if (mode === 'Hard' && score === 10) {
-    gameWon.classList.remove('hide');
+  else if (score === 10 && mode === 'Hard') {
+    backBtn.setAttribute('id', 'hide');
+    gameWon.removeAttribute('id', 'hide');
     music.pause();
     clappingSound.play();
   }
