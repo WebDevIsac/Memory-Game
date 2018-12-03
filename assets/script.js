@@ -66,7 +66,10 @@ hardBtn.addEventListener('click', () => {
 
 // Game won
 gameWonBackBtn.addEventListener('click', () => {
+  clappingSound.pause();
+  clappingSound.currentTime = 0;
   gameWon.setAttribute('id', 'hide');
+  backBtn.removeAttribute('id', 'hide');
   backToMenu();
 });
 
@@ -93,6 +96,7 @@ function startGame () {
   playMenu.removeAttribute('id', 'hide');
   cardsFlippedSpan.innerHTML = cardsFlipped;
   scoreSpan.innerHTML = score;
+  music.currentTime = 0;
   music.play();
 }
 
@@ -119,7 +123,6 @@ function backToMenu () {
   score = 0;
   cardsFlipped = 0;
   music.pause();
-  music.currentTime = 0;
   backToStart();
 }
 
