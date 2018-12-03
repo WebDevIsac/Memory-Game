@@ -53,7 +53,8 @@ $ git clone git@github.com:WebDevIsac/Memory-Game.git
 - [Isac Larrson](https://github.com/WebDevIsac) (WU)
 
 ### Testers:
- - 
+ - [Charmaine Wang](https://github.com/Charmaine-wang)
+ - [Per Baltzar](https://github.com/perbaltzar)
  
 ### License
 
