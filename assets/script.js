@@ -5,18 +5,19 @@
 // Div and containers
 const gameContainer = document.querySelector('.game-container');
 const playMenu = document.querySelector('.play-menu');
-const difficulty = document.querySelector('.difficulty');
-const start = document.querySelector('.start');
+const difficulty = document.querySelector('.difficulty-menu');
+// const startMenu = document.querySelector('.start-menu');
 const gameWon = document.querySelector('.game-won');
 
 // Buttons
-const difficultyBtn = start.querySelector(':nth-child(2)');
-const startBtn = start.querySelector(':last-child');
+const difficultyBtn = document.querySelector('.start-menu > .current-difficulty');
+const startBtn = document.querySelector('.start-menu > .start-game');
 const easyBtn = document.querySelector('.easy-mode');
 const mediumBtn = document.querySelector('.medium-mode');
 const hardBtn = document.querySelector('.hard-mode');
-const backBtn = playMenu.querySelector('h1');
-const gameWonBackBtn = gameWon.querySelector('h2');
+const backFromGameBtn = playMenu.querySelector('.back-from-game');
+const backFromWinBtn = gameWon.querySelector('.back-from-win');
+const restartGame = gameWon.querySelector('.restart-game');
 
 // Cards
 const cards = document.querySelectorAll('.card');
@@ -25,8 +26,8 @@ const backCards = document.querySelectorAll('.back-card');
 const hardModeCards = document.querySelectorAll('.hard-card');
 
 // Span for text changes
-const cardsFlippedSpan = playMenu.querySelector(':first-child > span');
-const scoreSpan = playMenu.querySelector(':nth-child(2) > span');
+const cardsFlippedSpan = playMenu.querySelector('.cards-flipped > span');
+const scoreSpan = playMenu.querySelector('.score > span');
 
 // Sounds
 const music = document.querySelector('.music');
@@ -48,7 +49,9 @@ flipSound.volume = 1;
 // Before game starts
 startBtn.addEventListener('click', startGame);
 difficultyBtn.addEventListener('click', chooseDifficulty);
-backBtn.addEventListener('click', backToMenu);
+backFromGameBtn.addEventListener('click', backToMenu);
+
+
 
 // Choose difficulty
 easyBtn.addEventListener('click', () => {
@@ -64,14 +67,23 @@ hardBtn.addEventListener('click', () => {
   backToStart();
 });
 
-// Game won
-gameWonBackBtn.addEventListener('click', () => {
+// Restart Game 
+restartGame.addEventListener('click', () => {
+	backFromWin();
+	startGame();
+});
+
+// Back to start menu from win menu
+backFromWinBtn.addEventListener('click', backFromWin);
+
+function backFromWin () {
+	gameContainer.removeAttribute('id', 'hide');
   clappingSound.pause();
   clappingSound.currentTime = 0;
   gameWon.setAttribute('id', 'hide');
-  backBtn.removeAttribute('id', 'hide');
+  backFromGameBtn.removeAttribute('id', 'hide');
   backToMenu();
-});
+}
 
 function startGame () {
   startBtn.parentElement.setAttribute('id', 'hide');
@@ -226,16 +238,20 @@ function check () {
 }
 
 function congratulations () {
-  if (score === 8 && (mode === 'Easy' || mode === 'Medium')) {
-    backBtn.setAttribute('id', 'hide');
-    gameWon.removeAttribute('id', 'hide');
-    music.pause();
-    clappingSound.play();
-  } 
-  else if (score === 10 && mode === 'Hard') {
-    backBtn.setAttribute('id', 'hide');
-    gameWon.removeAttribute('id', 'hide');
-    music.pause();
-    clappingSound.play();
-  }
-}
+	setTimeout(() => {
+		if (score === 8 && (mode === 'Easy' || mode === 'Medium')) {
+			backFromGameBtn.setAttribute('id', 'hide');
+			gameWon.removeAttribute('id', 'hide');
+			gameContainer.setAttribute('id', 'hide');
+			music.pause();
+			clappingSound.play();
+		} 
+		else if (score === 10 && mode === 'Hard') {
+			backFromGameBtn.setAttribute('id', 'hide');
+			gameWon.removeAttribute('id', 'hide');
+			gameContainer.setAttribute('id', 'hide');
+			music.pause();
+			clappingSound.play();
+		}
+	}, 1000);
+	}

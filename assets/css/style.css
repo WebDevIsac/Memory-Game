@@ -4,7 +4,13 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'MedievalSharp';
-    font-variant-caps: petite-caps;
+	font-variant-caps: petite-caps;
+	font-weight: 600;
+	font-size: 32px;
+}
+
+h3 {
+	font-size: 32px;
 }
 
 .container {
@@ -30,72 +36,68 @@
 }
 
 .header > h1 {
-    padding: 10px;
+	font-size: 52px;
+	padding: 10px;
 }
 
-.start {
-    text-align: center;
-    padding: 40px;
+.start-menu {
+	text-align: center;
 }
 
-.start > :first-child {
-    font-size: 24px;
-    margin: 20px 0;
+.start-menu > div {
+	margin: 20px;
 }
 
-.start > :nth-child(2) {
+.start-menu > .current-difficulty {
     cursor: pointer;
-    font-size: 24px;
     display: block;
     border-bottom: 2px solid black;
     display: inline-block;
 }
 
-.start > :nth-child(2):hover {
+.start-menu > .current-difficulty:hover {
     color: #9b9b9b;
 }
 
-.start > :last-child {
+.start-menu > .start-game {
     margin: 80px 0;
     cursor: pointer;
-    display: block;
+	display: block;
+	font-size: 40px;
 }
 
-.start > :last-child:hover {
+.start-menu > .start-game:hover {
     color: #9b9b9b;
 }
 
-.difficulty {
-    font-size: 24px;
+.difficulty-menu {
     text-align: center;
-    margin-bottom: 150px;
+    margin-bottom: 190px;
 }
 
-.difficulty * {
-    padding: 10px;
-}
-
-.difficulty > div {
+.difficulty-menu > div {
+	margin: 30px 10px;
     cursor: pointer;
     display: inline-block;
 }
 
-.difficulty > div:hover {
+.difficulty-menu > div:hover {
     color: #9b9b9b;
 }
 
 .play-menu {
-    text-align: center;
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.play-menu > div {
     margin: 40px 0;
 }
 
-.play-menu > h2 {
-    margin: 40px 0;
-}
-
-.play-menu > :last-child {
+.play-menu > .back-from-game {
     cursor: pointer;
-    display: inline-block;
+	display: inline-block;
+	font-size: 40px;
 }
 
 .play-menu > :last-child:hover {
@@ -103,30 +105,32 @@
 }
 
 .game-won {
-    position: absolute;
-    top: 50%;
-    margin-top: -250px;
-    left: 50%;
-    margin-left: -250px;
-    width: 500px;
-    height: 500px;
-    background: white;
+	width: 700px;
+	height: 700px;
     text-align: center;
-    padding: 50px 0;
+    padding: 20px;
     border: 5px solid black;
-    font-size: 20px;
-    z-index: 2;
+	font-size: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
 }
 
-.game-won > h2 {
-    font-size: 32px;
-    margin: 20px 0;
-    cursor: pointer;
-    display: inline-block;
+.game-won > h1 {
+	font-size: 52px;
 }
 
-.game-won > h2:hover {
-    color: #9b9b9b;
+.game-won > div {
+	cursor: pointer;
+}
+
+.game-won > div:hover {
+	color: #9b9b9b;
+}
+
+.game-won > .restart-game {
+    font-size: 40px;
 }
 
 .game-container {
@@ -135,15 +139,15 @@
     background-size: cover;
     background-repeat: no-repeat;
     display: grid;
-    grid-template-columns: repeat(4, 6rem);
-    grid-template-rows: repeat(4, 6rem);
+    grid-template-columns: repeat(4, 4.5rem);
+    grid-template-rows: repeat(4, 4.5rem);
     grid-gap: 1rem;
     overflow: hidden;
     z-index: 1;
 }
 
 .game-container-hard {
-    grid-template-columns: repeat(5, 6rem);
+    grid-template-columns: repeat(5, 4.5rem);
 }
 
 .card {
