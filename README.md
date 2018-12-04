@@ -1,6 +1,6 @@
 # Memory-Game
 
-<img src="https://media.giphy.com/media/V4uGHRgz0zi6Y/giphy.gif">
+<img src="https://media.giphy.com/media/V4uGHRgz0zi6Y/giphy.gif" width="600px" height="300px">
 
 ## About
 
