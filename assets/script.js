@@ -6,7 +6,7 @@
 const gameContainer = document.querySelector('.game-container');
 const playMenu = document.querySelector('.play-menu');
 const difficulty = document.querySelector('.difficulty-menu');
-// const startMenu = document.querySelector('.start-menu');
+const startMenu = document.querySelector('.start-menu');
 const gameWon = document.querySelector('.game-won');
 
 // Buttons
@@ -43,6 +43,9 @@ let score = 0;
 // Set audio volume
 music.volume = 0.25;
 flipSound.volume = 1;
+clappingSound.volume = 1;
+
+
 
 // Event listeners
 
@@ -50,8 +53,6 @@ flipSound.volume = 1;
 startBtn.addEventListener('click', startGame);
 difficultyBtn.addEventListener('click', chooseDifficulty);
 backFromGameBtn.addEventListener('click', backToMenu);
-
-
 
 // Choose difficulty
 easyBtn.addEventListener('click', () => {
@@ -67,39 +68,36 @@ hardBtn.addEventListener('click', () => {
   backToStart();
 });
 
-// Restart Game 
+// Back to menu after winning
+backFromWinBtn.addEventListener('click', backFromWin);
+
+// Restart game after winning
 restartGame.addEventListener('click', () => {
 	backFromWin();
 	startGame();
 });
 
-// Back to start menu from win menu
-backFromWinBtn.addEventListener('click', backFromWin);
 
-function backFromWin () {
-	gameContainer.removeAttribute('id', 'hide');
-  clappingSound.pause();
-  clappingSound.currentTime = 0;
-  gameWon.setAttribute('id', 'hide');
-  backFromGameBtn.removeAttribute('id', 'hide');
-  backToMenu();
-}
 
+// Functions
+
+// Function for starting game
 function startGame () {
-  startBtn.parentElement.setAttribute('id', 'hide');
+	startMenu.setAttribute('id', 'hide');
   for (let i = 0; i < cards.length - 4; i++) {
+		resetCards();
     cards[i].removeAttribute('id', 'hide');
   }
   if (mode === 'Easy') {
-    easyMode();
+		easyMode();
     gameContainer.classList.remove('game-container-hard');
   } 
   else if (mode === 'Medium') {
-    mediumMode();
+		mediumMode();
     gameContainer.classList.remove('game-container-hard');
   } 
   else if (mode === 'Hard') {
-    hardMode();
+		hardMode();
     for (let i = 0; i < hardModeCards.length; i++) {
       hardModeCards[i].removeAttribute('id', 'hide');
     }
@@ -112,18 +110,30 @@ function startGame () {
   music.play();
 }
 
+// Back to start menu from winning menu
+function backFromWin () {
+	gameContainer.removeAttribute('id', 'hide');
+	clappingSound.pause();
+	clappingSound.currentTime = 0;
+	gameWon.setAttribute('id', 'hide');
+	backFromGameBtn.removeAttribute('id', 'hide');
+	backToMenu();
+}
+
+// To difficulty menu from start menu 
+function chooseDifficulty () {
+	difficulty.removeAttribute('id', 'hide');
+	startBtn.parentElement.setAttribute('id', 'hide');
+}
+
+// Back to start menu from difficulty menu
 function backToStart () {
-  resetCards();
-  startBtn.parentElement.removeAttribute('id', 'hide');
+  startMenu.removeAttribute('id', 'hide');
   difficulty.setAttribute('id', 'hide');
   difficultyBtn.innerHTML = mode;
 }
 
-function chooseDifficulty () {
-  difficulty.removeAttribute('id', 'hide');
-  startBtn.parentElement.setAttribute('id', 'hide');
-}
-
+// Back to start menu from play menu
 function backToMenu () {
   playMenu.setAttribute('id', 'hide');
   for (let i = 0; i < cards.length; i++) {
@@ -138,6 +148,7 @@ function backToMenu () {
   backToStart();
 }
 
+// Reset cards order
 function resetCards () {
   for (let i = 0; i < cards.length; i++) {
     gameContainer.appendChild(cards[i]);
@@ -146,7 +157,7 @@ function resetCards () {
 
 // Easy mode
 function easyMode () {
-  resetCards();
+	// Shuffle 16 cards
   for (let i = 0; i < 16; i++) {
     let random = Math.floor(Math.random() * i);
     gameContainer.appendChild(cards[random]);
@@ -155,7 +166,7 @@ function easyMode () {
 
 // Medium mode
 function mediumMode () {
-  resetCards();
+	// Shuffle 16 cards
   for (let i = 0; i < 16; i++) {
     let random = Math.floor((Math.random() * 16));
     gameContainer.appendChild(cards[random]);
@@ -164,41 +175,46 @@ function mediumMode () {
 
 // Hard mode
 function hardMode () {
-  resetCards();
+	// Change layout for game container so all cards can fit inside
+	gameContainer.classList.add('game-container-hard');
+	// Show hard mode cards
   for (let i = 0; i < hardModeCards.length; i++) {
     hardModeCards[i].removeAttribute('id', 'hide');
-  }
+	}
+	// Shuffle all cards
   for (let i = 0; i < 21; i++) {
     let random = Math.floor((Math.random() * 20));
     gameContainer.appendChild(cards[random]);
-  }
-  gameContainer.classList.add('game-container-hard');
+	}
+}
+for (let i = 0; i < cards.length; i++) {
+	cards[i].addEventListener('click', () => {
+		flipCards(i);
+	});
+
+// Flip cards when clicked
+function flipCards (i) {
+			cards[i].classList.add('flip');
+			setTimeout(() => {
+			flipSound.play();
+		}, 150);
+		setTimeout(() => {
+			frontCards[i].setAttribute('id', 'hide');
+			backCards[i].removeAttribute('id', 'hide');
+		}, 300);
+		setTimeout(() => {
+			cards[i].classList.remove('flip');
+		}, 500);
+		cards[i].classList.add('disabled');
+		cardsFlipped++;
+		cardsFlippedSpan.innerHTML = cardsFlipped;
+		open.push(cards[i]);
+		if (open.length === 2) {
+			check();
+		}
 }
 
-// Flip cards
-  for (let i = 0; i < cards.length; i++) {
-    cards[i].addEventListener('click', () => {
-      cards[i].classList.add('flip');
-      setTimeout(() => {
-        flipSound.play();
-      }, 300);
-      setTimeout(() => {
-        frontCards[i].setAttribute('id', 'hide');
-        backCards[i].removeAttribute('id', 'hide');
-      }, 600);
-      setTimeout(() => {
-        cards[i].classList.remove('flip');
-      }, 1000);
-      cards[i].classList.add('disabled');
-      cardsFlipped++;
-      cardsFlippedSpan.innerHTML = cardsFlipped;
-      open.push(cards[i]);
-      if (open.length === 2) {
-        check();
-      }
-    });
-  }
-
+// Check if cards match
 function check () {
   gameContainer.classList.add('disabled');
   // If cards match
@@ -209,8 +225,9 @@ function check () {
       score++;
       scoreSpan.innerHTML = score;
       congratulations();
-    }, 500);
-  } 
+    }, 250);
+	} 
+	
   // If cards doesn't match
   else if (open[0].getAttribute('data-name') !== open[1].getAttribute('data-name')) {
     setTimeout(() => {
@@ -225,33 +242,28 @@ function check () {
         open[0].querySelector('.front-card').removeAttribute('id', 'hide');
         open[1].querySelector('.back-card').setAttribute('id', 'hide');
         open[1].querySelector('.front-card').removeAttribute('id', 'hide');
-      }, 600);
+      }, 300);
 
       setTimeout(() => {
         open[0].classList.remove('flip');
         open[1].classList.remove('flip');
         gameContainer.classList.remove('disabled');
         open.splice(0);
-      }, 1000);
-    }, 2500);
+      }, 500);
+    }, 1250);
   }
 }
 
+// If all pairs are found, show win menu 
 function congratulations () {
-	setTimeout(() => {
-		if (score === 8 && (mode === 'Easy' || mode === 'Medium')) {
+	if ((score === 8 && (mode === 'Easy' || mode === 'Medium')) || (score === 10 && mode === 'Hard')) {
+		setTimeout(() => {
 			backFromGameBtn.setAttribute('id', 'hide');
 			gameWon.removeAttribute('id', 'hide');
 			gameContainer.setAttribute('id', 'hide');
 			music.pause();
 			clappingSound.play();
-		} 
-		else if (score === 10 && mode === 'Hard') {
-			backFromGameBtn.setAttribute('id', 'hide');
-			gameWon.removeAttribute('id', 'hide');
-			gameContainer.setAttribute('id', 'hide');
-			music.pause();
-			clappingSound.play();
-		}
-	}, 1000);
+		}, 500);
 	}
+}
+}
