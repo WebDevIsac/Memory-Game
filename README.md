@@ -1,6 +1,6 @@
 # Memory-Game
 
-<img src="https://media.giphy.com/media/V4uGHRgz0zi6Y/giphy.gif" width="600px" height="300px">
+<img src="https://68.media.tumblr.com/db0e0cecf3aec1796293d634b2ad1b63/tumblr_oita6foggv1u8tquco3_500.gif">
 
 ## About
 
