@@ -1,6 +1,6 @@
 # Memory-Game
 
-![GIF](assets/images/confused.gif)
+![GIF](https://media.giphy.com/media/V4uGHRgz0zi6Y/giphy.gif)
 
 ## About
 
