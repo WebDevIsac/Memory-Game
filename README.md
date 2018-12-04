@@ -4,7 +4,7 @@
 
 ## About
 
-This is a memory with Lord of the Rings theme. It's made after an assignment in the course Client-based development. 
+This is a memory with Lord of the Rings theme. It's made for an assignment in the course Client-based development. 
 
 ### The criterias for the assignment:
 
