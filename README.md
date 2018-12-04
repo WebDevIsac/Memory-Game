@@ -4,7 +4,7 @@
 
 ## About
 
-This is a memory with a Lord of the Rings theme. It's made after an assignment in the course Client-based development. 
+This is a memory with Lord of the Rings theme. It's made after an assignment in the course Client-based development. 
 
 ### The criterias for the assignment:
 
@@ -35,7 +35,7 @@ This is a memory with a Lord of the Rings theme. It's made after an assignment i
 
 ## Installation:
 
- - Clone the HTTP repository
+ - Clone the HTTP repository 
 ```sh
 $ git clone https://github.com/WebDevIsac/Memory-Game.git
 ```
@@ -44,13 +44,13 @@ $ git clone https://github.com/WebDevIsac/Memory-Game.git
 $ git clone git@github.com:WebDevIsac/Memory-Game.git
 ```
 
- - Setup a dedicated webserver root in the cloned directory e.g: `/home/${USER}/sites/Memory-Game/`.
+ - Open the index.html file with your favorite browser
  
- - Enjoy the The landing page!
+ - Enjoy the my memory
 
 
 ### Creator:
-- [Isac Larrson](https://github.com/WebDevIsac) (WU)
+- [Isac Larrson](https://github.com/WebDevIsac)
 
 ### Testers:
  - [Charmaine Wang](https://github.com/Charmaine-wang)
