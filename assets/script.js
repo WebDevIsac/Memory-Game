@@ -199,8 +199,8 @@ function hardMode () {
 
 // Flip cards when clicked
 function flipCards (i) {
-			cards[i].classList.add('flip');
-			setTimeout(() => {
+		cards[i].classList.add('flip');
+		setTimeout(() => {
 			flipSound.play();
 		}, 300);
 		setTimeout(() => {
@@ -222,7 +222,6 @@ function flipCards (i) {
 // Check if cards match
 function check () {
 	gameContainer.classList.add('disabled');
-	
   // If cards match
   if (open[0].getAttribute('data-name') === open[1].getAttribute('data-name')) {
     setTimeout(() => {
@@ -249,7 +248,6 @@ function check () {
         open[1].querySelector('.back-card').setAttribute('id', 'hide');
         open[1].querySelector('.front-card').removeAttribute('id', 'hide');
       }, 600);
-
       setTimeout(() => {
         open[0].classList.remove('flip');
         open[1].classList.remove('flip');
