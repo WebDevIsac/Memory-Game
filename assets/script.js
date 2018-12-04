@@ -49,9 +49,11 @@ clappingSound.volume = 1;
 
 // Event listeners
 
-// Before game starts
+// Starting game when calling on startGame function
 startBtn.addEventListener('click', startGame);
+// Redirects user to difficult menu when calling on function chooseDifficulty
 difficultyBtn.addEventListener('click', chooseDifficulty);
+// Redirects user to 
 backFromGameBtn.addEventListener('click', backToMenu);
 
 // Choose difficulty
@@ -68,10 +70,17 @@ hardBtn.addEventListener('click', () => {
   backToStart();
 });
 
-// Back to menu after winning
+// Calling function flipCards for the clicked card
+for (let i = 0; i < cards.length; i++) {
+	cards[i].addEventListener('click', () => {
+		flipCards(i);
+	});
+}
+
+// Calling function backFromWin
 backFromWinBtn.addEventListener('click', backFromWin);
 
-// Restart game after winning
+// Calling functions backFromWin and startGame
 restartGame.addEventListener('click', () => {
 	backFromWin();
 	startGame();
@@ -187,24 +196,20 @@ function hardMode () {
     gameContainer.appendChild(cards[random]);
 	}
 }
-for (let i = 0; i < cards.length; i++) {
-	cards[i].addEventListener('click', () => {
-		flipCards(i);
-	});
 
 // Flip cards when clicked
 function flipCards (i) {
 			cards[i].classList.add('flip');
 			setTimeout(() => {
 			flipSound.play();
-		}, 150);
+		}, 300);
 		setTimeout(() => {
 			frontCards[i].setAttribute('id', 'hide');
 			backCards[i].removeAttribute('id', 'hide');
-		}, 300);
+		}, 600);
 		setTimeout(() => {
 			cards[i].classList.remove('flip');
-		}, 500);
+		}, 1000);
 		cards[i].classList.add('disabled');
 		cardsFlipped++;
 		cardsFlippedSpan.innerHTML = cardsFlipped;
@@ -216,7 +221,8 @@ function flipCards (i) {
 
 // Check if cards match
 function check () {
-  gameContainer.classList.add('disabled');
+	gameContainer.classList.add('disabled');
+	
   // If cards match
   if (open[0].getAttribute('data-name') === open[1].getAttribute('data-name')) {
     setTimeout(() => {
@@ -225,7 +231,7 @@ function check () {
       score++;
       scoreSpan.innerHTML = score;
       congratulations();
-    }, 250);
+    }, 500);
 	} 
 	
   // If cards doesn't match
@@ -242,15 +248,15 @@ function check () {
         open[0].querySelector('.front-card').removeAttribute('id', 'hide');
         open[1].querySelector('.back-card').setAttribute('id', 'hide');
         open[1].querySelector('.front-card').removeAttribute('id', 'hide');
-      }, 300);
+      }, 600);
 
       setTimeout(() => {
         open[0].classList.remove('flip');
         open[1].classList.remove('flip');
         gameContainer.classList.remove('disabled');
         open.splice(0);
-      }, 500);
-    }, 1250);
+      }, 1000);
+    }, 1500);
   }
 }
 
@@ -265,5 +271,4 @@ function congratulations () {
 			clappingSound.play();
 		}, 500);
 	}
-}
 }
