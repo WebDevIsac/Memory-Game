@@ -58,4 +58,4 @@ $ git clone git@github.com:WebDevIsac/Memory-Game.git
  
 ### License
 
-The MIT License ([MIT](https://raw.githubusercontent.com/WebDevIsac/The-Martians/master/LICENSE))
+The MIT License ([MIT](https://raw.githubusercontent.com/WebDevIsac/Memory-Game/master/LICENSE))
